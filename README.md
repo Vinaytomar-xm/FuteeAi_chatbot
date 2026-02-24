@@ -1,80 +1,176 @@
-# FuteeAI Chatbot — Vite + React
+# ⬡ FuteeAI Chatbot
 
-A fast, free AI chatbot built with Vite + React using the Groq API.
+> A fast, free AI chatbot built with **Vite + React** powered by **Groq API** — blazing fast inference, no OpenAI costs.
+
+<div align="center">
+
+![FuteeAI Chatbot](https://img.shields.io/badge/FuteeAI-Chatbot-7c6af5?style=for-the-badge&logo=react)
+![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)
+![Groq](https://img.shields.io/badge/Groq-API-F55036?style=for-the-badge)
+
+### 🚀 [Live Demo → futeeai-chatbot.vercel.app](https://chatwithfutee.vercel.app)
+
+</div>
 
 ---
 
-## Quick Start
+## ✨ Features
+
+- ⚡ **Blazing fast** — powered by Groq (fastest LLM inference available)
+- 🤖 **Multiple AI models** — Llama 3.1 8B, Llama 3.3 70B, Mixtral 8x7B, Gemma 2 9B
+- 💬 **Chat history** — saves up to 20 conversations in browser session
+- 📱 **Fully responsive** — hamburger sidebar on mobile/tablet, static on desktop
+- 🎨 **Beautiful dark UI** — custom design with Syne + JetBrains Mono fonts
+- ✅ **Markdown rendering** — bold, italic, inline code, code blocks
+- 🔐 **No login required** — opens directly to chat
+
+---
+
+## 📸 Preview
+
+```
+┌─────────────────────────────────────────────┐
+│  ⬡ FuteeAI          ⬡ FuteeAI    🟢        │
+│  ➕ New Chat  ────────────────────────────  │
+│                                              │
+│  MODEL                 How can I assist you? │
+│  [Llama 3.1 8B ▾]                           │
+│                   ┌─────────────────────┐    │
+│  HISTORY          │ tell me about AI    │    │
+│  💬 tell me...  🗑│ ───────────────     │    │
+│  💬 write code  🗑│ I'm an AI assistant │    │
+│                   └─────────────────────┘    │
+│  🗑 Clear History                            │
+│  ⚡ Powered by Groq   [Type a message... ➤] │
+└─────────────────────────────────────────────┘
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Tech | Purpose |
+|------|---------|
+| React 18 | UI framework |
+| Vite 5 | Build tool & dev server |
+| Groq API | AI inference (free tier available) |
+| Lucide React | Icons |
+| CSS Variables | Theming |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- A free Groq API key from [console.groq.com/keys](https://console.groq.com/keys)
+
+### Installation
 
 ```bash
+# 1. Clone the repo
+git clone https://github.com/YOUR_USERNAME/futeeai-chatbot.git
+cd futeeai-chatbot
+
+# 2. Install dependencies
 npm install
+
+# 3. Start dev server
 npm run dev
+
+# 4. Open in browser
+# → http://localhost:5173
 ```
 
-Open http://localhost:5173, enter your Groq key (get one free at https://console.groq.com/keys), and start chatting.
+### Environment Variables (optional)
 
----
+Create a `.env.local` file to use your own key:
 
-## Skip the Key-Entry Screen (Recommended)
-
-Create a `.env.local` file in the project root:
-
-```
+```env
 VITE_GROQ_API_KEY=gsk_your_key_here
 ```
 
-The app will detect it automatically and skip the login screen entirely.
-
 ---
 
-## The 401 Error — Root Causes & Fixes
-
-### Fix 1 — CORS Preflight (Primary Cause)
-Browsers cannot call `https://api.groq.com` directly from `localhost` with an `Authorization` header — the browser sends a CORS preflight OPTIONS request first, which gets blocked before your POST even fires.
-
-**Fix:** `vite.config.js` now proxies `/api/groq → https://api.groq.com/openai/v1` through Vite's dev server (server-to-server, no CORS).
-
-### Fix 2 — Stale `apiKey` Closure
-`sendMessage` was created with `useCallback([..., apiKey])`. If the key changed after first render, the callback still held the old key.
-
-**Fix:** `useChat.js` stores the key in a `useRef` and always reads `apiKeyRef.current`.
-
-### Fix 3 — No Key Format Validation
-Any string was sent to Groq without checking format first.
-
-**Fix:** `validateApiKey()` checks for the `gsk_` prefix and minimum length before any network call.
-
-### Fix 4 — Swallowed Error Details
-The 401 handler discarded the real Groq error body, showing only `"Invalid API Key"`.
-
-**Fix:** `groq.js` now parses and surfaces the full Groq error message in the UI.
-
-### Fix 5 — No Way to Change a Bad Key
-Once a wrong key was saved, the only fix was clearing DevTools manually.
-
-**Fix:** A **Change Key** button in the top bar resets the key instantly.
-
----
-
-## Production Note
-
-The Vite proxy only works during `npm run dev`. For production you need your own backend proxy — never expose your API key in a public frontend build.
-
----
-
-## Project Structure
+## 📦 Project Structure
 
 ```
-src/
-├── api/groq.js          # Groq API + key validation
-├── hooks/useChat.js     # Chat state (useRef stale closure fix)
-├── components/
-│   ├── ApiKeySetup.jsx  # Key entry with inline validation + env var support
-│   ├── Sidebar.jsx      # History + model selector
-│   ├── ChatMessage.jsx  # Message bubbles + typing indicator
-│   └── ChatInput.jsx    # Textarea + send button
-├── App.jsx              # Layout + Change Key button
-└── index.css            # CSS variables
-vite.config.js           # Dev proxy (THE CORS FIX)
-.env.example             # Copy to .env.local with your key
+futeeai-chatbot/
+├── public/
+├── src/
+│   ├── api/
+│   │   └── groq.js          # Groq API calls + model list
+│   ├── components/
+│   │   ├── Sidebar.jsx       # Chat history + model selector
+│   │   ├── ChatMessage.jsx   # Message bubbles + typing indicator
+│   │   └── ChatInput.jsx     # Textarea + send button
+│   ├── hooks/
+│   │   └── useChat.js        # Chat state management
+│   ├── App.jsx               # Main layout + responsive sidebar
+│   ├── App.css               # CSS media queries + animations
+│   └── index.css             # CSS variables + global styles
+├── vite.config.js            # Vite + proxy config
+├── vercel.json               # Vercel API proxy rewrite
+└── package.json
 ```
+
+---
+
+## 🌐 Deploying to Vercel
+
+### Step 1 — Push to GitHub
+
+```bash
+git init
+git add .
+git commit -m "initial commit"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/futeeai-chatbot.git
+git push -u origin main
+```
+
+### Step 2 — Deploy on Vercel
+
+1. Go to [vercel.com](https://vercel.com) → **Add New Project**
+2. Import your GitHub repo
+3. Framework: **Vite** (auto-detected)
+4. Click **Deploy** ✅
+
+> Vercel auto-deploys on every `git push` to main.
+
+---
+
+## 🤖 Available Models
+
+| Model | Speed | Best For |
+|-------|-------|----------|
+| Llama 3.1 8B | ⚡⚡⚡ Fastest | Quick answers, everyday chat |
+| Llama 3.3 70B | ⚡⚡ Fast | Complex reasoning, detailed answers |
+| Mixtral 8x7B | ⚡⚡ Fast | Coding, multilingual |
+| Gemma 2 9B | ⚡⚡ Fast | Precise, factual responses |
+
+---
+
+## 📱 Responsive Behavior
+
+| Screen Size | Sidebar | Navigation |
+|-------------|---------|------------|
+| Desktop (≥768px) | Always visible | Static left panel |
+| Tablet / Mobile (<768px) | Hidden by default | ☰ Hamburger toggle |
+
+---
+
+## 📄 License
+
+MIT © [FuteeAI](https://github.com/Vinaytomar-xm/FuteeAi-chatbot)
+
+---
+
+<div align="center">
+  Made with ❤️ using React + Groq
+  <br/>
+  <a href="https://futeeai-chatbot.vercel.app">🚀 Live Demo</a> •
+  <a href="https://console.groq.com/keys">🔑 Get Free API Key</a> •
+  <a href="https://github.com/Vinaytomar-xm/FuteeAi-chatbot">⭐ Star on GitHub</a>
+</div>
