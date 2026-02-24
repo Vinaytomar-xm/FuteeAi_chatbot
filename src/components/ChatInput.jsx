@@ -26,7 +26,7 @@ export default function ChatInput({ onSend, disabled }) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Type a message… (Enter to send, Shift+Enter for newline)"
+          placeholder="Chat with FuteeAI… (Enter to send, Shift+Enter for newline)"
           disabled={disabled}
           rows={1}
         />
@@ -70,7 +70,7 @@ const styles = {
     color: 'var(--text-primary)',
     fontFamily: 'var(--font-mono)',
     fontSize: 13,
-    lineHeight: 1.6,
+    lineHeight: 2.5,
     resize: 'none',
     maxHeight: 160,
     overflowY: 'auto',
