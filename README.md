@@ -174,3 +174,19 @@ MIT © [FuteeAI](https://github.com/Vinaytomar-xm/FuteeAi-chatbot)
   <a href="https://console.groq.com/keys">🔑 Get Free API Key</a> •
   <a href="https://github.com/Vinaytomar-xm/FuteeAi-chatbot">⭐ Star on GitHub</a>
 </div>
+
+## 📞 Contact
+
+For any questions or feedback, feel free to reach out through:
+- GitHub Issues
+- Email: [Tomarvinaysingh70@gmail.com]
+- LinkedIn: [https://linkedin.com/in/vinay-singh-tomar-5b65b9377]
+
+---
+
+<div align="center">
+
+Made with ❤️ by Vinay Singh Tomar
+
+</div>
+
