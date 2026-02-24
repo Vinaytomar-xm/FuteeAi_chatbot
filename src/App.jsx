@@ -125,7 +125,7 @@ function WelcomeScreen() {
       <div style={welcomeStyles.glow} />
       <div style={welcomeStyles.icon}>⬡</div>
       <h2 style={welcomeStyles.heading}>How can I assist you?</h2>
-      <p style={welcomeStyles.sub}>Fast & Free AI — powered by Groq</p>
+      <p style={welcomeStyles.sub}>Fast & Free AI Chatbot</p>
       <div style={welcomeStyles.suggestions}>
         {suggestions.map((s) => (
           <div key={s} style={welcomeStyles.chip}>{s}</div>
