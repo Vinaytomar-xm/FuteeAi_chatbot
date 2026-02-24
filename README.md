@@ -9,7 +9,7 @@
 ![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react)
 ![Groq](https://img.shields.io/badge/Groq-API-F55036?style=for-the-badge)
 
-### 🚀 [Live Demo → futeeai-chatbot.vercel.app](https://chatwithfutee.vercel.app)
+### 🚀 [Live Demo → chatwithfutee.vercel.app](https://chatwithfutee.vercel.app)
 
 </div>
 
