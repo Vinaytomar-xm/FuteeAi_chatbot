@@ -68,7 +68,7 @@ export default function App() {
             </button>
             {/* <Bot size={16} color="var(--accent)" /> */}
             <span style={styles.logoIcon}>⬡</span>
-            <span className="topbar-title">Chat With FuteeAI</span>
+            <span className="topbar-title">ChatWithFuteeAI</span>
           </div>
           <div className="topbar-right">
             {/* New Chat — CSS shows on mobile, hides on desktop */}
