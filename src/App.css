@@ -65,6 +65,7 @@
   letter-spacing: 0.05em;
   color: var(--text-primary);
   white-space: nowrap;
+  margin-left: -4px;
 }
 
 .status-dot {
